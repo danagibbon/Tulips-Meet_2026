@@ -945,3 +945,86 @@ datatable(madv.results, extensions = 'Buttons',
           options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')))
 ```
 
+
+
+## T & T - Trampoline {.tabset .tabset-fade}
+
+```{r}
+# read in data
+t.NF.results <- read.csv(here::here("data","Trampoline-New_Flyers-Results-Tulips.csv")) %>%
+    mutate(across(c(Team),factor))
+
+t.IF.results <- read.csv(here::here("data","Trampoline-Intermediate_Flyers-Results-Tulips.csv")) %>%
+    mutate(across(c(Team),factor))
+
+```
+
+
+### New Flyers
+
+```{r tramp.NF}
+tramp.nf <- t.NF.results %>%
+  select(Athlete, Team, Trampoline) %>%
+  arrange(desc(Trampoline)) %>% 
+  mutate(Rank = dense_rank(desc(Trampoline))) %>%
+  relocate(Rank, Team)
+
+datatable(tramp.nf, extensions = 'Buttons',
+          options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')),
+          rownames = FALSE)
+```
+
+### Intermediate Flyers
+
+```{r tramp.IF}
+tramp.if <- t.IF.results %>%
+  select(Athlete, Team, Trampoline) %>%
+  arrange(desc(Trampoline)) %>% 
+  mutate(Rank = dense_rank(desc(Trampoline))) %>%
+  relocate(Rank, Team)
+
+datatable(tramp.if, extensions = 'Buttons',
+          options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')),
+          rownames = FALSE)
+```
+
+## T & T - Double Mini {.tabset .tabset-fade}
+
+```{r}
+# read in data
+dm.NF.results <- read.csv(here::here("data","Double_Mini-New_Flyers-Results-Tulips.csv")) %>%
+    mutate(across(c(Team),factor))
+
+dm.IF.results <- read.csv(here::here("data","Double_Mini-Intermediate_Flyers-Results-Tulips.csv")) %>%
+    mutate(across(c(Team),factor))
+
+```
+
+
+### New Flyers
+
+```{r df.NF}
+df.nf <- dm.NF.results %>%
+  select(Athlete, Team, Double.Mini) %>%
+  arrange(desc(Double.Mini)) %>% 
+  mutate(Rank = dense_rank(desc(Double.Mini))) %>%
+  relocate(Rank, Team)
+
+datatable(df.nf, extensions = 'Buttons',
+          options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')),
+          rownames = FALSE)
+```
+
+### Intermediate Flyers
+
+```{r df.IF}
+df.if <- dm.IF.results %>%
+  select(Athlete, Team, Double.Mini) %>%
+  arrange(desc(Double.Mini)) %>% 
+  mutate(Rank = dense_rank(desc(Double.Mini))) %>%
+  relocate(Rank, Team)
+
+datatable(df.if, extensions = 'Buttons',
+          options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')),
+          rownames = FALSE)
+```
