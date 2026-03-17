@@ -1028,3 +1028,24 @@ datatable(df.if, extensions = 'Buttons',
           options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')),
           rownames = FALSE)
 ```
+
+
+## Omnithon Results {.tabset .tabset-fade}
+
+There were 5 gymnasts who competed in all 12 events offered!  
+
+```{r df.OM}
+# read in data
+OM.results <- read.csv(here::here("data","Omnithon-results.csv")) %>%
+    mutate(across(c(Team),factor))
+
+OM.results <- OM.results %>%
+  arrange(desc(Omnithon.Total)) %>% 
+  mutate(Rank = dense_rank(desc(Omnithon.Total))) %>%
+  relocate(Rank, Team)
+
+datatable(OM.results, extensions = 'Buttons',
+          options = list(dom = 'Bfrtip', buttons = c('copy', 'csv', 'excel', 'pdf', 'print')),
+          rownames = FALSE)
+```
+
